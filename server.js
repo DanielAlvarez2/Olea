@@ -4,7 +4,7 @@ const cloudinary = require('cloudinary').v2
 const fse = require('fs-extra')
 const app = express()
 app.use(express.static('public'))
-app.use(express,json())
+app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 const cloudinaryConfig = cloudinary.config({
@@ -14,7 +14,7 @@ const cloudinaryConfig = cloudinary.config({
     secure: true
 })
 
-function paswwordProtected(req,res,next){
+function passwordProtected(req,res,next){
     res.set("WWW-Authenticate","Basic realm='Cloudinary Front-end Upload'")
     if(req.headers.authorization == "Basic YWRtaW46YWRtaW4="){
         next()
@@ -120,4 +120,4 @@ app.post('delete-photo', async(req,res)=>{
     res.redirect('view-photos')
 })
 
-app.listen(3000)
+app.listen(3100)
